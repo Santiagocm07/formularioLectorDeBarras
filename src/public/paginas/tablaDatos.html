@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla usuarios | AutosLeo</title>
+    <link rel="stylesheet" href="../estilos/tablaDatos.css">
+    <!--FontAwesome CDN-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <!--SweeatAlert-->
+    <!-- <link rel="stylesheet" href="sweetalert2.min.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+</head>
+<body>
+
+    <img src="../imagenes/logoAutosLeo.jpeg" alt="">
+
+
+    <button id="openModalBtn">Registrar Usuario</button>
+    <button id="singUp">Salir <i class="fa-solid fa-right-to-bracket"></i></button>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Registro de Usuario</h2>
+            <form id="registroForm">
+                <label for="cedula">Cédula del usuario:</label>
+                <input type="text" id="cedula" name="cedula" placeholder="Escanear cédula" required />
+
+                <label for="matricula">Matricula del vehículo:</label>
+                <input type="text" id="matricula" name="matricula" placeholder="Escanear matricula" required />
+
+                <button type="submit" class="registrar">Registrar</button>
+            </form>
+        </div>
+    </div>
+
+    <!--Table users-->
+    <div class="table">
+        <div class="table_header">
+            <p><b>Usuarios registrados</b></p>
+            <div>
+                <input type="text" id="filterInput" placeholder="Buscar...">
+                <button class="add_new">Buscar usuario</button>
+            </div>
+        </div>
+        <div class="table_section">
+            <table id="userTable">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Cédula</th>
+                        <th>Nombre completo</th>
+                        <th>Fecha nacimiento</th>
+                        <th>Placa</th>
+                        <th>Tipo de vehículo</th>
+                        <th>Fecha ingreso</th>
+                        <th>Acción</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>01</td>
+                        <td>1254789</td>
+                        <td>Santiago Orozco</td>
+                        <td>27/09/2004</td>
+                        <td>KLO745</td>
+                        <td>Particular</td>
+                        <td>26/09/2024</td>
+                        <td>
+                            <button onclick="deleteRow(this)"><i class="fa-solid fa-trash-can"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>02</td>
+                        <td>235689445</td>
+                        <td>Matias Cardona</td>
+                        <td>09/05/1999</td>
+                        <td>KOO148</td>
+                        <td>Particular</td>
+                        <td>28/09/2024</td>
+                        <td>
+                            <button onclick="deleteRow(this)"><i class="fa-solid fa-trash-can"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>03</td>
+                        <td>987456321</td>
+                        <td>Samuel Quintero</td>
+                        <td>14/12/2000</td>
+                        <td>RIG785</td>
+                        <td>Particular</td>
+                        <td>28/09/2024</td>
+                        <td>
+                            <button onclick="deleteRow(this)"><i class="fa-solid fa-trash-can"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>04</td>
+                        <td>235648521</td>
+                        <td>Manuel Osorio</td>
+                        <td>14/03/1989</td>
+                        <td>LOP458</td>
+                        <td>Particular</td>
+                        <td>29/09/2024</td>
+                        <td>
+                            <button onclick="deleteRow(this)"><i class="fa-solid fa-trash-can"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>05</td>
+                        <td>325612489</td>
+                        <td>Lina Betancur</td>
+                        <td>19/12/1998</td>
+                        <td>MOM456</td>
+                        <td>Particular</td>
+                        <td>30/09/2024</td>
+                        <td>
+                            <button onclick="deleteRow(this)"><i class="fa-solid fa-trash-can"></i></button>
+                        </td>
+                    </tr>
+                   
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="../js/tablaDatos.js"></script>
+    <!--SweeatAlert-->
+    <!-- <script src="sweetalert2.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de ingreso | AutosLeo</title>
+    <link rel="stylesheet" href="../estilos/style.css">
+    <!--CDN fontAwesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body>
+    <img src="../imagenes/logoAutosLeo.jpeg" alt="">
+
+    <fieldset class="datoFecha">
+        <legend id="fecha"></legend>
+        <h2 id="reloj"></h2>
+    </fieldset>
+
+    <div class="formulario">
+        <button id="privado"><i class="fa-solid fa-lock"></i></button>
+        <div class="form-content">
+            <h2>¡Bienvenido!</h2>
+            <p>Por favor escane sus documentos:</p>
+            <form class="form-registro" id="formRegistro">
+                <fieldset class="dataUse">
+                    <legend class="user">Datos del usuario</legend>
+                    <label for="cedula">Cédula de ciudadania:</label>
+                    <input type="text" id="upCedula" name="cedula" placeholder="Escanear tu cédula" autofocus required />
+                    <input type="number" id="numeroCed" name="numero" placeholder="Número de documento 🔒" readonly>
+                    <input type="text" id="nombreUsu" name="nombre" placeholder="Nombre del usuario 🔒" readonly />
+                    <input type="text" id="generoUsu" name="genero" placeholder="Género 🔒" readonly/>
+                    <input type="number" id="fechaUsu" name="fecha" placeholder="Fecha de nacimiento 🔒" readonly/>
+                    <input type="text" id="tipoUsu" name="sangre" placeholder="Tipo de sangre 🔒" readonly/>
+
+                </fieldset>
+               
+                <fieldset class="dataVehiculo">
+                    <legend class="vehículo">Datos del vehículo</legend>
+                    <label for="matricula">Matricula del vehículo:</label>
+                    <input type="text" id="carMatricula" name="matricula" placeholder="Escanear la matricula de tu vehículo" required />
+                    <input type="text" id="nombrePro" name="nombre" placeholder="Nombre del propietario 🔒" readonly/>
+                    <input type="text" id="direccionPro" name="direccion" placeholder="Dirección de residencia 🔒" readonly/>
+                    <input type="text" id="codigoPro" name="codigo" placeholder="Código de departamento 🔒" readonly/>
+                    <input type="text" id="placa" name="placa" placeholder="Digite la placa del vehículo" />
+                    <select id="tipoVeh" name="vehiculo" required>
+                        <option value="">Seleccione el tipo de vehículo</option>
+                        <option value="Servicio particular">Particular</option>
+                        <option value="Servicio publico">Público</option>
+                    </select>
+                    <input type="hidden" id="fechaHora" name="fechaHora" />
+                </fieldset>
+
+                <div class="checkbox-container">
+                    <input type="checkbox" id="autorizacion" name="autorizacion" required />
+                    <label for="autorizacion">Autorizo el uso de mis datos sin fines de lucro.</label>
+                </div>
+
+                <button type="submit" class="registroDatos">Registrar datos</button>
+                <button type="reset" class="borrarDatos">Cancelar</button>
+                
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Personal autorizado</h2>
+        <form id="loginForm">
+            <label for="usuario">Usuario:</label>
+            <input type="text" id="usuario" name="usuario" placeholder="Ingresar usuario" required>
+            
+            <label for="contraseña">Contraseña:</label>
+            <input type="password" id="contraseña" name="contraseña" placeholder="Ingresar contraseña" required>
+            
+            <button type="submit" class="loginUser">Iniciar Sesión</button>
+        </form>
+        <div id="message"></div>
+    </div>
+</div>
+
+
+    <script src="../js/script.js"></script>
+    
+</body>
+</html>

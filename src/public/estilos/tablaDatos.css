@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Poppins:wght@400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    /* overflow: hidden; */
+}
+
+img {
+    width: 300px;
+    height: auto; 
+    display: block; 
+    margin: 0 auto; 
+}
+
+#openModalBtn {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: #fff;
+    border: 1px solid #28a745;
+    border-radius: 6px;
+    margin: 10px 20px;
+}
+
+#openModalBtn:hover {
+    background-color: #58d073;
+}
+
+#singUp {
+    padding: 10px 20px;
+    background-color: #c80d0d;
+    color: #fff;
+    border: 1px solid #c80d0d;
+    border-radius: 6px;
+}
+
+#singUp:hover {
+    background-color: #FF6464;
+}
+
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; /* Permitir desplazamiento si es necesario */
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+
+.modal-content {
+    background-color: white;
+    margin: 8% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 500px; 
+    min-height: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+}
+
+.modal-content h2 {
+    text-align: center;
+}
+
+#registroForm {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    margin: auto;
+}
+
+.modal label {
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.modal input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.registrar {
+    padding: 10px;
+    background-color: #28a745;
+    color: #fff;
+    border: 1px solid #28a745;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    display:inline-block;
+    margin-right: auto;
+}
+
+.registrar:hover {
+    background-color: #58d073;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,.close:focus {
+    color: #c80d0d;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/* Estilos de la tabla*/
+.table{
+    width: 100%;
+}
+
+.table_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: rgb(240, 240, 240);
+}
+
+.table_header p {
+    color: #000000;
+    font-size: 30px;
+    margin-left: 18px;
+}
+
+.table button {
+    outline: none;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.table_header ::placeholder {
+    color: #007bff;
+}
+
+.add_new {
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #007bff;
+}
+
+.add_new:hover {
+    background-color: #1eadff;
+}
+
+.table input {
+    padding: 10px 20px;
+    margin: 0 10px;
+    outline: none;
+    border: 1px solid #007bff;
+    border-radius: 6px;
+    color: #000000;
+}
+
+.table_section {
+    height: 500px;
+    overflow: auto;
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;
+    min-width: 1000px;
+    border-collapse: collapse;
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+    background-color: rgb(244, 232, 232);
+    color: #a35f5f;
+    font-size: 14px;
+}
+
+td button {
+    background-color: #c80d0d;
+    color: #fff;
+}
+
+th, td {
+    border-bottom: 1px solid #dddddd;
+    padding: 10px 20px;
+    word-break: break-all;
+    text-align: center;
+    font-size: 14px;
+}
+
+tr:hover td {
+    color: #FF6464;
+    cursor: pointer;
+    background-color: rgb(244, 232, 232);
+}
+
+/*Estilos para el fondo de las filas*/
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2; 
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+/* ::placeholder {
+    color: #007bff;
+} */
+
