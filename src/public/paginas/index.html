@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de ingreso | AutosLeo</title>
+    <title>Form Persona Natural | AutosLeo</title>
     <link rel="stylesheet" href="../estilos/style.css">
     <!--CDN fontAwesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <!--SweetAlert-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
 <body>
     <img src="../imagenes/logoAutosLeo.jpeg" alt="">
@@ -17,20 +19,37 @@
     </fieldset>
 
     <div class="formulario">
+        <p class="leerDoc"><a href="../documentos/Autorización datos personales.pdf" target="_blank"><i class="fa-solid fa-circle-exclamation"></i> Leer la autorizacion del tratamiento de datos</a></p>
         <button id="privado"><i class="fa-solid fa-lock"></i></button>
         <div class="form-content">
             <h2>¡Bienvenido!</h2>
             <p>Por favor escane sus documentos:</p>
-            <form class="form-registro" id="formRegistro">
+            <div class="botonFormulario">
+                <button type="button" onclick="location.href='/formulario'">Ir al formulario Persona Juridica</button>
+            </div>
+            <form class="form-registro" id="formRegistro" action="/validarDatos" method="post" onsubmit="capturarFecha(event)">
                 <fieldset class="dataUse">
                     <legend class="user">Datos del usuario</legend>
                     <label for="cedula">Cédula de ciudadania:</label>
                     <input type="text" id="upCedula" name="cedula" placeholder="Escanear tu cédula" autofocus required />
-                    <input type="number" id="numeroCed" name="numero" placeholder="Número de documento 🔒" readonly>
-                    <input type="text" id="nombreUsu" name="nombre" placeholder="Nombre del usuario 🔒" readonly />
+                    <input type="text" id="numeroCed" name="numeroUsr" placeholder="Número de documento 🔒" readonly>
+                    <input type="text" id="nombreUsu" name="nombreUsr" placeholder="Nombre del usuario 🔒" readonly />
                     <input type="text" id="generoUsu" name="genero" placeholder="Género 🔒" readonly/>
                     <input type="number" id="fechaUsu" name="fecha" placeholder="Fecha de nacimiento 🔒" readonly/>
                     <input type="text" id="tipoUsu" name="sangre" placeholder="Tipo de sangre 🔒" readonly/>
+                    <input type="number" id="celularUsu" name="celularUsr" placeholder="Digite el número de celular" />
+                    <input type="email" id="correoUsu" name="correoUsr" placeholder="Digite el correo electronico"/>
+                    <select id="responsableIVA" name="IvaUsr" required>
+                        <option value="">Responsable de IVA</option>
+                        <option value="Si">Sí</option>
+                        <option value="No">No</option>
+                    </select>
+                    <input type="text" id="tipoPersona" name="tipoPersona" value="Natural" readonly/>
+                    <!-- <select id="tipoPersona" name="tipoPersona" required>
+                        <option value="">Tipo de persona</option>
+                        <option value="Natural">Natural</option>
+                        <option value="Juridica">Jurídica</option>
+                    </select> -->
 
                 </fieldset>
                
@@ -42,23 +61,30 @@
                     <input type="text" id="direccionPro" name="direccion" placeholder="Dirección de residencia 🔒" readonly/>
                     <input type="text" id="codigoPro" name="codigo" placeholder="Código de departamento 🔒" readonly/>
                     <input type="text" id="placa" name="placa" placeholder="Digite la placa del vehículo" />
+                    <input type="number" id="modeloCar" name="modelo" placeholder="Digite el modelo" />
+                    <input type="number" id="cilindrajeCar" name="cilindraje" placeholder="Digite el cilindraje" />
+                    <input type="text" id="marcaCar" name="marca" placeholder="Marca del vehículo" />
+                    <input type="text" id="colorCar" name="color" placeholder="Color del vehículo" style="text-transform: capitalize;"/>
                     <select id="tipoVeh" name="vehiculo" required>
                         <option value="">Seleccione el tipo de vehículo</option>
-                        <option value="Servicio particular">Particular</option>
-                        <option value="Servicio publico">Público</option>
+                        <option value="Particular">Particular</option>
+                        <option value="Publico">Público</option>
                     </select>
+                    <input type="text" id="ocupacionPro" name="ocupacion" placeholder="Escriba su ocupación"/>
                     <input type="hidden" id="fechaHora" name="fechaHora" />
                 </fieldset>
 
                 <div class="checkbox-container">
                     <input type="checkbox" id="autorizacion" name="autorizacion" required />
-                    <label for="autorizacion">Autorizo el uso de mis datos sin fines de lucro.</label>
+                    <label for="autorizacion">Autorizo el uso de mis datos en AutosLeo.</label>
                 </div>
 
                 <button type="submit" class="registroDatos">Registrar datos</button>
                 <button type="reset" class="borrarDatos">Cancelar</button>
                 
             </form>
+            <div id="mensajeValidar"></div>
+
         </div>
     </div>
 
@@ -75,7 +101,7 @@
             <label for="contraseña">Contraseña:</label>
             <input type="password" id="contraseña" name="contraseña" placeholder="Ingresar contraseña" required>
             
-            <button type="submit" class="loginUser">Iniciar Sesión</button>
+            <button type="button" class="loginUser">Iniciar Sesión</button>
         </form>
         <div id="message"></div>
     </div>
@@ -83,6 +109,8 @@
 
 
     <script src="../js/script.js"></script>
+    <!--SweetAlert-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
 </body>
 </html>

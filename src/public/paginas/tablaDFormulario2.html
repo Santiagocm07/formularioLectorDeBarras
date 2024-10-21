@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla usuarios juridicos | AutosLeo</title>
+    <link rel="stylesheet" href="../estilos/tablaDFormulario2.css">
+    <!--FontAwesome CDN-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <!--SweeatAlert-->
+    <!-- <link rel="stylesheet" href="sweetalert2.min.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+</head>
+<body>
+
+    <img src="../imagenes/logoAutosLeo.jpeg" alt="">
+
+    <div class="seguidores-container">
+        <div class="seguidores-label">Total registros</div>
+        <div class="seguidores-count" id="numero-seguidores">0</div>
+        <button id="formulario1" onclick="window.location.href='tabla'">Registros Naturales</button>
+        <button id="singUp">Salir <i class="fa-solid fa-right-to-bracket"></i></button>   
+    </div>
+
+    <!--Table users-->
+    <div class="tablaEmpresa">
+        <div class="headerTable">
+            <p><b>Empresas registradas</b></p>
+            <div>
+                <input type="text" id="filterInput" placeholder="Buscar...">
+                <button class="buscarNombre">Buscar usuario</button>
+            </div>
+        </div>
+        <div class="sectionTabla">
+            <table id="empresaTabla">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>NIT</th>
+                        <th>Nombre empresa</th>
+                        <th>Fecha actual</th>
+                        <th>Celular</th>
+                        <th>Correo</th>
+                        <th>Responble IVA</th>
+                        <th>Tipo persona</th>
+                        <th>Placa</th>
+                        <th>Modelo</th>
+                        <th>Cilindraje</th>
+                        <th>Marca</th>
+                        <th>Color</th>
+                        <th>Tipo de vehículo</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="../js/tablaDFormulario2.js"></script>
+    <!--SweeatAlert-->
+    <!-- <script src="sweetalert2.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+</body>
+</html>

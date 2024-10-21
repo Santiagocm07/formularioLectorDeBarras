@@ -24,12 +24,12 @@ img {
     position: absolute;
     top: 20px;
     right: 10px;
-    margin: 0;
+    margin: 0 20px;
     text-align: center;
     border-radius: 5px;
-    padding: 15px;
+    padding: 15px 20px;
     border: 2px solid #c80d0d;
-}
+} 
 
 #fecha {
     font-size: .9em;
@@ -167,6 +167,61 @@ button {
     margin-bottom: 20px;
 }
 
+p {
+    line-height: 1.4;
+}
+
+.leerDoc a {
+    outline: none;
+    text-decoration: none;
+    padding: 2px 1px 0;
+    color: #c80d0d; 
+    display: inline-flex; 
+    align-items: center; 
+    transition: background 0.3s, color 0.3s;
+}
+
+
+.leerDoc a:link {
+    color: #FF6464;
+}
+
+.leerDoc a:visited {
+    color: #ff3434;
+}
+
+.leerDoc a:focus {
+    border-bottom: 1px solid;
+    background: #ffc5c5;
+}
+
+.leerDoc a:hover {
+    border-bottom: 1px solid;
+    background: #ffc5c5; 
+}
+
+.leerDoc a:active {
+    background: #FF6464; 
+    color: #c80d0d; 
+}
+
+.leerDoc a i {
+    margin-right: 5px; 
+    animation: jump 1s ease 6;
+}
+
+@keyframes jump {
+    0% {
+        transform: translateY(0); 
+    }
+    50% {
+        transform: translateY(-10px); 
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
 #privado {
     padding: 10px;
     background-color: #c80d0d; 
@@ -192,6 +247,25 @@ button {
 .form-content p {
     text-align: center;
     margin-bottom: 20px;
+}
+
+.botonFormulario {
+    text-align: right;
+    margin-top: 10px;
+}
+
+.botonFormulario button {
+    padding: 10px 20px;
+    background-color: #aab0b6;
+    color: #3a3c3f;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s; 
+}
+
+.botonFormulario button:hover {
+    background-color: #cdd1d4;
 }
 
 fieldset {
@@ -326,3 +400,71 @@ button {
     text-decoration: none;
     cursor: pointer;
 }
+
+
+#message {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #c80d0d;
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 970px) {
+    .datoFecha {
+        margin: 10px auto; 
+        padding: 10px 15px; 
+        width: 50%; 
+        position: static;
+    }
+
+    img {
+        width: 100%; 
+        max-width: 300px; 
+        margin-bottom: 10px;
+    }
+
+    .formulario {
+        padding: 15px; 
+    }
+
+    #upCedula, #carMatricula {
+        max-width: 100%; 
+    }
+
+    input, select {
+        width: 100%; 
+        margin: 5px 0; 
+    }
+
+    .modal-content {
+        width: 90%; 
+        max-width: 400px; 
+    }
+}
+
+@media (max-width: 480px) {
+    #fecha {
+        font-size: 0.8em; 
+    }
+
+    #reloj {
+        font-size: 0.9em; 
+    }
+
+    .form-content h2 {
+        font-size: 24px; 
+    }
+
+    .form-content p {
+        font-size: 16px; 
+    }
+
+    /* button {
+        width: 100%; 
+        margin-right: 0; 
+        margin-top: 10px; 
+    } */
+}
+
+

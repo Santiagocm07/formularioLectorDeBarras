@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Persona Jurídica | AutosLeo</title>
+    <link rel="stylesheet" href="../estilos/formularioJuridico.css">
+    <!--CDN fontAwesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <!--SweetAlert-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+</head>
+<body>
+    <img src="../imagenes/logoAutosLeo.jpeg" alt="">
+
+    <div class="formularioEmpresa">
+        <p class="leerDoc"><a href="../documentos/Autorización datos personales.pdf" target="_blank"><i class="fa-solid fa-circle-exclamation"></i> Leer la autorizacion del tratamiento de datos</a></p>
+        <div class="form-contenido">
+            <h2>¡Bienvenido!</h2>
+            <p>Por favor digite el NIT de la empresa y luego escane la matricula del vehículo:</p>
+            <div class="botonPagina">
+                <button type="button" onclick="location.href='/'">Ir al formulario Persona Natural</button>
+            </div>
+            <form class="form-empresa" id="formEmpresa" action="/consultaFormularioDos" method="post">
+                <fieldset class="dataEmpresa">
+                    <legend class="empresa">Datos de la empresa</legend>
+                    <label for="nitEmpresa">NIT:</label>
+                    <input type="text" id="numeroNit" name="numeroNit" placeholder="Digite el NIT de la empresa" autofocus required />
+                    <button type="button" id="consultarButton">Consultar</button>
+                    <input type="text" id="nombreEmpresa" name="nombreEmpresa" placeholder="Razón social 🔒" readonly>
+                    <input type="text" id="fechaActual" name="fechaActual" placeholder="Fecha actual 🔒" readonly />
+                    <input type="text" id="estadoEmpresa" name="estadoEmpresa" placeholder="Estado 🔒" readonly/>
+                    <input type="number" id="celularEmpresa" name="celularEmpresa" placeholder="Digite el número de celular" />
+                    <input type="email" id="correoEmpresa" name="correoEmpresa" placeholder="Digite el correo electronico"/>
+                    <select id="responsableIVA" name="ivaEmpresa" required>
+                        <option value="">Responsable de IVA</option>
+                        <option value="Si">Sí</option>
+                        <option value="No">No</option>
+                    </select>
+                    <input type="text" id="tipoPersonaEmp" name="tipoPersonaEmp" value="Jurídica" readonly/>
+
+                </fieldset>
+               
+                <fieldset class="dataVehiculo">
+                    <legend class="vehículo">Datos del vehículo</legend>
+                    <label for="matricula">Matricula del vehículo:</label>
+                    <input type="text" id="empresaVeh" name="empresaVeh" placeholder="Escanear la matricula de tu vehículo" required/>
+                    <input type="text" id="nombreDue" name="nombreDue" placeholder="Nombre del propietario 🔒" readonly/>
+                    <input type="text" id="direccionDue" name="direccionDue" placeholder="Dirección de residencia 🔒" readonly/>
+                    <input type="text" id="codigoDepar" name="codigoDepar" placeholder="Código de departamento 🔒" readonly/>
+                    <input type="text" id="placaVehi" name="placaVehi" placeholder="Digite la placa del vehículo" />
+                    <input type="number" id="modeloVehi" name="modeloVehi" placeholder="Digite el modelo" />
+                    <input type="number" id="cilindrajeVehi" name="cilindrajeVehi" placeholder="Digite el cilindraje" />
+                    <input type="text" id="marcaVehi" name="marcaVehi" placeholder="Marca del vehículo" />
+                    <input type="text" id="colorVehi" name="colorVehi" placeholder="Color del vehículo" style="text-transform: capitalize;"/>
+                    <select id="tipoVehi" name="tipoVehi" required>
+                        <option value="">Seleccione el tipo de vehículo</option>
+                        <option value="Particular">Particular</option>
+                        <option value="Publico">Público</option>
+                    </select>
+                    <input type="text" id="ocupacionDue" name="ocupacionDue" placeholder="Escriba su ocupación"/>
+                    <!-- <input type="hidden" id="fechaHora" name="fechaHora" /> -->
+                </fieldset>
+
+                <div class="checkbox-contenido">
+                    <input type="checkbox" id="autorizacion" name="autorizacion" required />
+                    <label for="autorizacion">Autorizo el uso de mis datos en AutosLeo.</label>
+                </div>
+
+                <button type="submit" class="registroDatosEmpresa">Registrar datos</button>
+                <button type="reset" class="borrarDatosEmpresa">Cancelar</button>
+                
+            </form>
+            <div id="mensajeRegistro"></div>
+
+        </div>
+    </div>
+    
+    <script src="../js/formularioJuridico.js"></script>
+</body>
+</html>

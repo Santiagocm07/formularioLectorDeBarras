@@ -16,10 +16,17 @@
 
     <img src="../imagenes/logoAutosLeo.jpeg" alt="">
 
+    <div class="seguidores-container">
+        <div class="seguidores-label">Total registros</div>
+        <div class="seguidores-count" id="numero-seguidores">0</div>
+        <button id="formulario2" onclick="window.location.href='tablaEmpresas'">Registros Jurídicos</button>
+        <button id="singUp">Salir <i class="fa-solid fa-right-to-bracket"></i></button>
+    </div>
 
-    <button id="openModalBtn">Registrar Usuario</button>
-    <button id="singUp">Salir <i class="fa-solid fa-right-to-bracket"></i></button>
-    <div id="modal" class="modal">
+
+    <!-- <button id="openModalBtn">Usuarios Registrados</button> -->
+    
+    <!-- <div id="modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Registro de Usuario</h2>
@@ -33,7 +40,7 @@
                 <button type="submit" class="registrar">Registrar</button>
             </form>
         </div>
-    </div>
+    </div> -->
 
     <!--Table users-->
     <div class="table">
@@ -52,74 +59,19 @@
                         <th>Cédula</th>
                         <th>Nombre completo</th>
                         <th>Fecha nacimiento</th>
+                        <th>Celular</th>
+                        <th>Correo</th>
                         <th>Placa</th>
+                        <th>Modelo</th>
+                        <th>Cilindraje</th>
+                        <th>Marca</th>
+                        <th>Color</th>
                         <th>Tipo de vehículo</th>
                         <th>Fecha ingreso</th>
                         <th>Acción</th>
-                        
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>01</td>
-                        <td>1254789</td>
-                        <td>Santiago Orozco</td>
-                        <td>27/09/2004</td>
-                        <td>KLO745</td>
-                        <td>Particular</td>
-                        <td>26/09/2024</td>
-                        <td>
-                            <button onclick="deleteRow(this)"><i class="fa-solid fa-trash-can"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>02</td>
-                        <td>235689445</td>
-                        <td>Matias Cardona</td>
-                        <td>09/05/1999</td>
-                        <td>KOO148</td>
-                        <td>Particular</td>
-                        <td>28/09/2024</td>
-                        <td>
-                            <button onclick="deleteRow(this)"><i class="fa-solid fa-trash-can"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>03</td>
-                        <td>987456321</td>
-                        <td>Samuel Quintero</td>
-                        <td>14/12/2000</td>
-                        <td>RIG785</td>
-                        <td>Particular</td>
-                        <td>28/09/2024</td>
-                        <td>
-                            <button onclick="deleteRow(this)"><i class="fa-solid fa-trash-can"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>04</td>
-                        <td>235648521</td>
-                        <td>Manuel Osorio</td>
-                        <td>14/03/1989</td>
-                        <td>LOP458</td>
-                        <td>Particular</td>
-                        <td>29/09/2024</td>
-                        <td>
-                            <button onclick="deleteRow(this)"><i class="fa-solid fa-trash-can"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>05</td>
-                        <td>325612489</td>
-                        <td>Lina Betancur</td>
-                        <td>19/12/1998</td>
-                        <td>MOM456</td>
-                        <td>Particular</td>
-                        <td>30/09/2024</td>
-                        <td>
-                            <button onclick="deleteRow(this)"><i class="fa-solid fa-trash-can"></i></button>
-                        </td>
-                    </tr>
                    
                 </tbody>
             </table>
