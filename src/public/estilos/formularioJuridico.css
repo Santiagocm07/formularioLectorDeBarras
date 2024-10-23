@@ -46,7 +46,8 @@ img {
     flex-direction: column; 
     align-items: center; 
     justify-content: center; 
-    background-color: #f0f0f0;
+    /* background-color: #f0f0f0; */
+    background-color: rgb(244, 232, 232);
     border: 1px solid #ccc;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
@@ -71,6 +72,7 @@ p {
     display: inline-flex; 
     align-items: center; 
     transition: background 0.3s, color 0.3s;
+    margin-bottom: 30px;
 }
 
 
@@ -188,6 +190,22 @@ input, select {
 
 input:nth-child(odd) {
     margin-right: 10px; /* Espacio extra solo a inputs impares */
+}
+
+/*Animación botón de consultar NIT*/
+#consultarButton {
+    position: relative;
+    border: 3px solid #ff3434;
+    background-color: transparent;
+    color: #ff3434;
+    overflow: hidden;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+#consultarButton:hover {
+    color: white;
+    background-color: #ff3434;
 }
 
 .checkbox-contenido {

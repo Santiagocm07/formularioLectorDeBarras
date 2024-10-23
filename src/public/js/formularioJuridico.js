@@ -33,19 +33,6 @@ document.getElementById('consultarButton').addEventListener('click', async () =>
 });
 
 //Función para poner la fecha 
-// document.getElementById('formEmpresa').addEventListener('submit', function(event) {
-//     // Obtener la fecha actual
-//     const fecha = new Date();
-//     const opciones = { day: '2-digit', month: '2-digit', year: 'numeric' };
-//     const fechaFormateada = fecha.toLocaleDateString('es-ES', opciones); // Formato DD/MM/YYYY
-
-//     // Colocar la fecha en el input
-//     document.getElementById('fechaActual').value = fechaFormateada;
-
-//     // Aquí puedes realizar cualquier otra acción que necesites al enviar el formulario
-//     // event.preventDefault(); // Descomenta esto si no deseas enviar el formulario inmediatamente
-// });
-
 document.getElementById('consultarButton').addEventListener('click', function() {
     realizarConsulta();
 });
@@ -129,6 +116,112 @@ document.getElementById('empresaVeh').addEventListener('focusout', function() {
     // Puedes optar por limpiar el buffer o no
     // entradaBuffer = ''; // Descomenta si deseas limpiar el buffer al salir
 });
+
+
+//Enviar formulario 
+
+//Envio sin el metodo fetch
+// document.getElementById('formEmpresa').addEventListener('submit', async (event) => {
+//     // event.preventDefault(); // Evita el envío predeterminado del formulario para manejarlo con fetch
+
+//     const formData = new FormData(event.target);
+//     console.log([...formData.entries()]);
+
+//     try {
+//         const response = await fetch(event.target.action, {
+//             method: event.target.method,
+//             body: formData,
+//         });
+
+//         if (!response.ok) {
+//             throw new Error('Error en la solicitud');
+//         }
+
+//         // Si la respuesta es exitosa
+//         const result = await response.json(); // Suponiendo que el servidor devuelve un JSON
+//         console.log(result)
+//         // await swal("¡Éxito!", "Tus datos se guardaron correctamente.", "success");
+
+//         // Limpiar el formulario
+//         event.target.reset();
+
+//     } catch (error) {
+//         console.error('Error:', error);
+//         // await swal("¡Error!", "Hubo un problema al guardar tus datos.", "error");
+//     }
+// });
+
+
+//Envio con el metodo fetch
+// document.getElementById('formEmpresa').addEventListener('submit', async (event) => {
+//     event.preventDefault(); // Evita el envío predeterminado del formulario
+
+//     const formData = new FormData(event.target);
+
+//     try {
+//         const response = await fetch(event.target.action, {
+//             method: event.target.method,
+//             body: formData,
+//         });
+
+//         if (!response.ok) {
+//             throw new Error('Error en la solicitud');
+//         }
+
+//         const result = await response.json();
+//         Swal.fire('Éxito', result.message, 'success');
+//         event.target.reset(); // Limpia el formulario
+
+//     } catch (error) {
+//         console.error('Error:', error);
+//         Swal.fire('Error', 'Hubo un problema al guardar los datos', 'error');
+//     }
+// });
+
+document.getElementById('formEmpresa').addEventListener('submit', (event) => {
+    event.preventDefault(); 
+
+    const form = event.target;
+
+    fetch('/consultaFormularioDos', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded' // Tipo de contenido
+        },
+        body: new URLSearchParams(new FormData(form)).toString() // Convierte los datos del formulario a URLSearchParams
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error en la respuesta del servidor');
+        }
+        return response.json(); 
+    })
+    .then(data => {
+        Swal.fire({
+            title: data.message || 'Datos guardados con éxito',
+            html: `<p>${data.segMensaje}</p>
+                    <p style="margin-bottom: 10px;"></p>
+                    <p><b>${data.mensFinal}</b></p>`, 
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+        }).then(() => {
+            form.reset(); 
+        });
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        Swal.fire({
+            title: 'Error',
+            text: 'Error al enviar los datos. Inténtalo de nuevo.', 
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+        });
+    });
+});
+
+
+
+
 
 
 

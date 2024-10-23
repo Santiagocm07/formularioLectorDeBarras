@@ -190,8 +190,10 @@ table {
 thead th {
     position: sticky;
     top: 0;
-    background-color: rgb(244, 232, 232);
-    color: #a35f5f;
+    /* background-color: rgb(244, 232, 232); */
+    background-color: #5d5d5d;
+    /* color: #a35f5f; */
+    color: #ccc;
     font-size: 14px;
 }
 
@@ -210,9 +212,10 @@ th, td {
 }
 
 tr:hover td {
-    color: #FF6464;
+    /* color: #FF6464; */
     cursor: pointer;
-    background-color: rgb(244, 232, 232);
+    /* background-color: rgb(244, 232, 232); */
+    background-color: #b0b0b0;
 }
 
 /*Estilos para el fondo de las filas*/

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión | AutosLeo</title>
+    <link rel="stylesheet" href="../estilos/login.css">
+</head>
+<body>
+    <!-- <div class="containerLogin">
+        <img src="../imagenes/logoAutosLeo.jpeg" alt="" class="logo">
+        <h1>Iniciar sesión</h1>
+        <form id="login-form" action="">
+            <div>
+                <label for="username">Usuario:</label>
+                <input type="text" id="nombrePers" name="nombrePers" required>
+            </div>
+            <div>
+                <label for="password">Contraseña:</label>
+                <input type="password" id="contraPers" name="contraPers" required>
+            </div>
+            <button type="submit">Ingresar</button>
+        </form>
+
+        <button id="crear-pers-btn">Crear nuevo usuario</button>
+
+        <div id="crear-pers-section" style="display: none;">
+            <h2>Crear nuevo usuario</h2>
+            <div>
+                <label for="pin">PIN:</label>
+                <input type="text" id="pin" name="pin">
+                <button id="validar-pin-btn">Validar PIN</button>
+            </div>
+            <div id="nueva-pers-field" style="display: none;">
+                <div>
+                    <label for="nueva-persona">Nuevo usuario:</label>
+                    <input type="text" id="nuevaPer" name="nuevaPer" required>
+                </div>
+                <div>
+                    <label for="nuevo-password">Nueva contraseña:</label>
+                    <input type="password" id="nuevaContra" name="nuevaContra" required>
+                </div>
+                <button id="guardar-pers-btn">Guardar usuario</button>
+            </div>
+        </div>
+    </div> -->
+
+    <img src="../imagenes/logoAutosLeo.jpeg" alt="" class="logo">
+
+    <div class="containerLogin">
+       
+        
+        <div id="login-section">
+            <h1>Iniciar sesión</h1>
+            
+            <form id="login-form" action="/login" method="post">
+                <div>
+                    <label for="nombrePers">Usuario:</label>
+                    <input type="text" id="nombrePers" name="nombrePers" required>
+                </div>
+                <div>
+                    <label for="contraPers">Contraseña:</label>
+                    <input type="password" id="contraPers" name="contraPers" required>
+                </div>
+                <button type="submit" class="btn-ingresar">Ingresar</button>
+            </form>
+            <div id="message-container" style="display:none;"></div>
+
+            <button id="crear-pers-btn" class="btn-crearPers">Crear nuevo usuario</button>
+        </div>
+    
+        <div id="crear-pers-section" style="display: none;">
+            <h2>Crear nuevo usuario</h2>
+            <form id="crear-usuario-form" action="/crear-usuario" method="post">
+                <div>
+                    <label for="pin">PIN:</label>
+                    <input type="text" id="pin" name="pin">
+                    <button id="validar-pin-btn" class="btn-validar">Validar PIN</button>
+                </div>
+                <div id="nueva-pers-field" style="display: none;">
+                    <div>
+                        <label for="nuevaPer">Nuevo usuario:</label>
+                        <input type="text" id="nuevaPer" name="nuevaPer" required>
+                    </div>
+                    <div>
+                        <label for="nuevaContra">Nueva contraseña:</label>
+                        <input type="password" id="nuevaContra" name="nuevaContra" required>
+                    </div>
+                    <button id="guardar-pers-btn" class="btn-guardarPer" type="button">Guardar usuario</button>
+                </div>
+                <button id="volver-btn" class="btn-volver">Volver al inicio de sesión</button>
+            </form>
+            
+        </div>
+    </div>
+    
+
+    <script src="../js/login.js"></script>
+    
+</body>
+</html>

@@ -17,15 +17,15 @@ let conexion = mysql.createConnection({
     database: "lectordebarras"
 });
 
-conexion.connect(function(err){
-    if(err){
-        throw err;
-    } else {
-        console.log("Conexion DB exitosa")
-    }
-});
+// conexion.connect(function(err){
+//     if(err){
+//         throw err;
+//     } else {
+//         console.log("Conexion DB exitosa")
+//     }
+// });
 
-// module.exports = conexion;
+module.exports = conexion;
 // conexion.end();
 
 //Metodo para que los datos del formulario sean codificados
@@ -44,6 +44,10 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'paginas', 'index.html'));
 });
 
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'paginas', 'login.html'));
+});
+
 app.get('/formulario', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'paginas', 'formularioJuridico.html'));
 });
@@ -55,6 +59,10 @@ app.get('/tabla', (req, res) => {
 app.get('/tablaEmpresas', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'paginas', 'tablaDFormulario2.html'));
 });
+
+// Importa las rutas de login
+const loginRoutes = require('./loginPers');
+app.use(loginRoutes);
 
 //Consultas a la DB 
 app.post('/validarDatos', function(req, res) {
@@ -177,6 +185,18 @@ app.put('/usuarios/:Id', function(req, res) {
 app.post('/consultaFormularioDos', function(req, res) {
     const datosEmp = req.body;
 
+    // Coloca aquí los console.log
+    // console.log("Datos recibidos:", datosEmp);
+    
+    // const numeroCompania = datosEmp.numeroNit; // Asegúrate de que este campo sea el correcto
+
+    // // Verifica si el numeroComp está vacío o no
+    // console.log("Número de Nit:", numeroCompania);
+
+    // if (!numeroCompania) {
+    //     return res.status(400).json({ error: 'El NIT es requerido' });
+    // }
+
     let numeroComp = datosEmp.numeroNit;
     let nombreComp = datosEmp.nombreEmpresa;
     let fechaIngreso = datosEmp.fechaActual;
@@ -203,8 +223,10 @@ app.post('/consultaFormularioDos', function(req, res) {
     conexion.query(registroEmpresa, valoresEmpresa, function(error) {
         if (error) {
             console.error(error);
+            return res.status(500).json({ error: 'Error al guardar datos' });
         } else {
             console.log("Datos de la empresa guardados con exito");
+            return res.status(200).json({ message: 'Datos guardados con éxito', segMensaje:'¡Muchas gracias por elegirnos como tu empresa automotriz! Valoramos tu confianza y estamos comprometidos a ofrecerte el mejor servicio y atención.', mensFinal:'¡Te damos la bienvenida a nuestra comunidad exclusiva!' });
         }
     });
 });
@@ -245,28 +267,58 @@ app.delete('/eliminarDatosEmpresas/:id', function(req, res) {
 });
 
 
+// app.put('/editarDatosEmpresas/:id', function(req, res) {
+//     const idEmpresa = req.params.id;
+//     const { columna, valor } = req.body; // Obtener la columna y el nuevo valor
+
+//     console.log(`Actualizando ${columna} a ${valor} para id: ${idEmpresa}`);
+    
+
+//     // Asegúrate de que la columna sea válida para evitar inyecciones SQL
+//     const validColumns = ['numeroEmp', 'nombreEmp', 'fechaActual', 'celularEmp', 'correoEmp', 'ivaEmpresa', 'tipoPersonaEmp', 'placaAuto', 'modeloAuto', 'cilindrajeAuto', 'marcaAuto', 'colorAuto', 'tipoVehiculoEmp', 'fecha']; // Agrega aquí las columnas que permitas editar
+//     if (!validColumns[columna]) {
+//         return res.status(400).send('Columna no válida');
+//     }
+
+//     const consulta = `UPDATE datosempresa SET ${validColumns[columna]} = ? WHERE idEmpresa = ?`;
+//     conexion.query(consulta, [valor, idEmpresa], function(error, resultados) {
+//         if (error) {
+//             console.error(error);
+//             return res.status(500).send('Error al actualizar el registro');
+//         }
+
+//         res.status(200).send('Registro actualizado con éxito');
+//     });
+// });
+
 app.put('/editarDatosEmpresas/:id', function(req, res) {
     const idEmpresa = req.params.id;
     const { columna, valor } = req.body; // Obtener la columna y el nuevo valor
 
+    console.log(`Actualizando ${columna} a ${valor} para id: ${idEmpresa}`);
+
     // Asegúrate de que la columna sea válida para evitar inyecciones SQL
-    const validColumns = ['numeroEmp', 'nombreEmp', 'fechaActual', 'celularEmp', 'correoEmp', 'ivaEmpresa', 'tipoPersonaEmp', 'placaAuto', 'modeloAuto', 'cilindrajeAuto', 'marcaAuto', 'colorAuto', 'tipoVehiculoEmp', 'fecha']; // Agrega aquí las columnas que permitas editar
-    if (!validColumns[columna]) {
+    const validColumns = ['numeroEmp', 'nombreEmp', 'fechaActual', 'celularEmp', 'correoEmp', 'ivaEmpresa', 'tipoPersonaEmp', 'placaAuto', 'modeloAuto', 'cilindrajeAuto', 'marcaAuto', 'colorAuto', 'tipoVehiculoEmp'];
+    
+    // Validar que la columna sea una válida
+    if (!validColumns.includes(columna)) {
+        console.error('Columna no válida:', columna);
         return res.status(400).send('Columna no válida');
     }
 
-    const consulta = `UPDATE datosempresa SET ${validColumns[columna]} = ? WHERE idEmpresa = ?`;
+    const consulta = `UPDATE datosempresa SET ${columna} = ? WHERE idEmpresa = ?`;
+    
+    // Asegúrate de que la consulta se ejecute correctamente
     conexion.query(consulta, [valor, idEmpresa], function(error, resultados) {
         if (error) {
-            console.error(error);
+            console.error('Error al actualizar:', error);
             return res.status(500).send('Error al actualizar el registro');
         }
 
+        console.log('Registro actualizado exitosamente:', resultados);
         res.status(200).send('Registro actualizado con éxito');
     });
 });
-
-
 
 
 

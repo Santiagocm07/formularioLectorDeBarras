@@ -181,7 +181,7 @@ userTable.addEventListener('dblclick', function(e) {
         // Solo convertir a minusculas la columna correo y tipo vehiculo
         input.addEventListener('input', () => {
             // Verifica si el índice de la celda es 2 o 4
-            if (target.cellIndex === 5 || target.cellIndex === 11) {
+            if (target.cellIndex === 5 || target.cellIndex === 10) {
                 input.value = input.value.toLowerCase(); // Convierte a minúsculas
             } else {
                 input.value = input.value.toUpperCase(); // Convierte a mayúsculas
