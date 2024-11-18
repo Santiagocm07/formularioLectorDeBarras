@@ -18,7 +18,7 @@ img {
 }
 
 /*Fieldset de la hora y fecha*/
-/* .datoFecha {
+.datoFecha {
     width: 300px;
     height: 90px;
     position: absolute;
@@ -39,15 +39,122 @@ img {
 #reloj {
     font-size: 1em;
     margin: 0;
+}
+
+/*CSS del formulario viejo*/
+/* .formulario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    margin: 5px auto; 
+    border: 1px solid #888;
+    max-width: 500px;
+    width: 100%; 
+    min-height: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    padding: 10px;
+}
+
+#privado {
+    padding: 10px;
+    background-color: #c80d0d; 
+    color: #fff;               
+    border: none;              
+    border-radius: 4px;   
+    cursor: pointer;          
+    margin-left: auto;
+    display: block; 
+    justify-content: flex-end;
+    margin-top: 3px;
+}
+
+#privado:hover {
+    background-color: #FF6464;
+}
+
+.form-content h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 30px;
+}
+
+.form-content p {
+    font-size: 18px;
+    text-decoration: underline;
+}
+
+.form-registro {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+    width: 100%;
+    min-height: 400px;
+}
+
+label {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+#upCedula, #carMatricula {
+    padding: 8px; 
+    width: 100%; 
+    max-width: 300px;
+    box-sizing: border-box;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+}
+
+.checkbox-container input {
+    width: 18px;
+    height: 18px; 
+    cursor: pointer;
+}
+
+button {
+    justify-content: flex-end;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 4px;
+
+}
+
+.registroDatos {
+    background-color: #28a745;
+    color: #fff;
+    border: 1px solid #28a745;
+}
+
+.registroDatos:hover {
+    background-color: #58d073;
+}
+
+.borrarDatos {
+    background-color: #007bff;
+    color: #fff;
+    border: 1px solid #007bff;
+}
+
+.borrarDatos:hover {
+    background-color: #1eadff;
 } */
 
-.formularioEmpresa {
+
+.formulario {
     display: flex;
     flex-direction: column; 
     align-items: center; 
     justify-content: center; 
-    /* background-color: #f0f0f0; */
-    background-color: rgb(244, 232, 232);
+    background-color: #f0f0f0;
     border: 1px solid #ccc;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
@@ -72,7 +179,6 @@ p {
     display: inline-flex; 
     align-items: center; 
     transition: background 0.3s, color 0.3s;
-    margin-bottom: 30px;
 }
 
 
@@ -116,7 +222,7 @@ p {
     }
 }
 
-/* #privado {
+#privado {
     padding: 10px;
     background-color: #c80d0d; 
     color: #fff;               
@@ -131,24 +237,24 @@ p {
 
 #privado:hover {
     background-color: #FF6464;
-} */
+}
 
-.form-contenido h2 {
+.form-content h2 {
     text-align: center;
     margin: 0 0 10px;
 }
 
-.form-contenido p {
+.form-content p {
     text-align: center;
     margin-bottom: 20px;
 }
 
-.botonPagina {
+.botonFormulario {
     text-align: right;
     margin-top: 10px;
 }
 
-.botonPagina button {
+.botonFormulario button {
     padding: 10px 20px;
     background-color: #aab0b6;
     color: #3a3c3f;
@@ -158,7 +264,7 @@ p {
     transition: background-color 0.3s; 
 }
 
-.botonPagina button:hover {
+.botonFormulario button:hover {
     background-color: #cdd1d4;
 }
 
@@ -192,29 +298,13 @@ input:nth-child(odd) {
     margin-right: 10px; /* Espacio extra solo a inputs impares */
 }
 
-/*Animación botón de consultar NIT*/
-#consultarButton {
-    position: relative;
-    border: 3px solid #ff3434;
-    background-color: transparent;
-    color: #ff3434;
-    overflow: hidden;
-    padding: 10px 20px;
-    cursor: pointer;
-}
-
-#consultarButton:hover {
-    color: white;
-    background-color: #ff3434;
-}
-
-.checkbox-contenido {
+.checkbox-container {
     display: flex;
     align-items: center;
     margin: 10px 0;
 }
 
-.checkbox-contenido input {
+.checkbox-container input {
     width: auto; /* Tamaño automático para el checkbox */
     margin-right: 5px;
 }
@@ -227,90 +317,28 @@ button {
     margin-right: 10px;
 }
 
-.registroDatosEmpresa {
+.registroDatos {
     background-color: #28a745;
     color: #fff;
     border: 1px solid #28a745;
 }
 
-.registroDatosEmpresa:hover {
+.registroDatos:hover {
     background-color: #58d073;
 }
 
-.borrarDatosEmpresa {
+.borrarDatos {
     background-color: #c80d0d;
     color: #fff;
     border-radius: 1px solid #c80d0d;
 }
 
-.borrarDatosEmpresa:hover {
+.borrarDatos:hover {
     background-color: #FF6464;
 }
 
-/* #loadingMessage {
-    display: none; 
-    position: fixed; 
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-    background-color: rgba(255, 255, 255, 0.8); 
-    padding: 40px;
-    border-radius: 5px; 
-    z-index: 9999; 
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
-    text-align: center; 
-} */
-
-#loadingMessage {
-    display: none; 
-    position: fixed; 
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-    background-color: rgba(255, 255, 255, 0.9); /* Fondo más opaco */
-    padding: 40px;
-    border-radius: 10px; /* Bordes más redondeados */
-    z-index: 9999; 
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada */
-    text-align: center; 
-    font-family: "Poppins", sans-serif; 
-    font-size: 20px; 
-    color: #333; 
-    animation: fadeIn 0.3s ease; 
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-/* Estilo para un spinner */
-.spinner {
-    border: 4px solid rgba(0, 0, 0, 0.1);
-    border-left-color: #FF5733;; /* Color del spinner */
-    border-radius: 50%;
-    width: 40px; /* Ancho del spinner */
-    height: 40px; /* Alto del spinner */
-    animation: spin 1s linear infinite; /* Animación de giro */
-    margin: 20px auto; /* Centrar el spinner */
-}
-
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-
 /*Modal*/
-/* .modal {
+.modal {
     display: none; 
     position: fixed; 
     z-index: 1;
@@ -328,7 +356,7 @@ button {
     margin: 10% auto; 
     padding: 20px;
     border: 1px solid #888;
-    width: 400px; 
+    width: 400px; /* Ancho de la modal */
     border-radius: 6px;
 }
 
@@ -352,6 +380,7 @@ button {
     border-radius: 4px;
     cursor: pointer;
     margin-top: 10px;
+    /* align-self: center;  */
 }
 
 .loginUser:hover {
@@ -378,16 +407,16 @@ button {
     font-size: 14px;
     font-weight: bold;
     color: #c80d0d;
-} */
+}
 
 /* Media Queries para Responsividad */
 @media (max-width: 970px) {
-    /* .datoFecha {
+    .datoFecha {
         margin: 10px auto; 
         padding: 10px 15px; 
         width: 50%; 
         position: static;
-    } */
+    }
 
     img {
         width: 100%; 
@@ -395,11 +424,11 @@ button {
         margin-bottom: 10px;
     }
 
-    .formularioEmpresa {
+    .formulario {
         padding: 15px; 
     }
 
-    #numeroNit, #empresaVeh {
+    #upCedula, #carMatricula {
         max-width: 100%; 
     }
 
@@ -408,26 +437,26 @@ button {
         margin: 5px 0; 
     }
 
-    /* .modal-content {
+    .modal-content {
         width: 90%; 
         max-width: 400px; 
-    } */
+    }
 }
 
 @media (max-width: 480px) {
-    /* #fecha {
+    #fecha {
         font-size: 0.8em; 
     }
 
     #reloj {
         font-size: 0.9em; 
-    } */
+    }
 
-    .form-contenido h2 {
+    .form-content h2 {
         font-size: 24px; 
     }
 
-    .form-contenido p {
+    .form-content p {
         font-size: 16px; 
     }
 

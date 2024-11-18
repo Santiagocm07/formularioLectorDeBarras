@@ -19,7 +19,7 @@
             <h2>¡Bienvenido!</h2>
             <p>Por favor digite el NIT de la empresa y luego escane la matricula del vehículo:</p>
             <div class="botonPagina">
-                <button type="button" onclick="location.href='/'">Ir al formulario Persona Natural</button>
+                <button type="button" onclick="location.href='/formulario1'">Ir al formulario Persona Natural</button>
             </div>
             <form class="form-empresa" id="formEmpresa" action="/consultaFormularioDos" method="post">
                 <fieldset class="dataEmpresa">
@@ -38,6 +38,7 @@
                         <option value="No">No</option>
                     </select>
                     <input type="text" id="tipoPersonaEmp" name="tipoPersonaEmp" value="Jurídica" readonly/>
+                    <input type="text" id="repreLegalEmp" name="repreLegalEmp" placeholder="Nombre del representante legal"/>
 
                 </fieldset>
                
@@ -71,6 +72,12 @@
                 <button type="reset" class="borrarDatosEmpresa">Cancelar</button>
                 
             </form>
+            <!-- <div id="loadingMessage" style="display: none;">Cargando, por favor espere...</div> -->
+            <div id="loadingMessage">
+                <div class="spinner"></div>
+                <b>Cargando, por favor espere...</b>
+            </div>
+
             <div id="mensajeRegistro"></div>
 
         </div>

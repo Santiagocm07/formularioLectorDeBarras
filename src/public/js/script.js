@@ -1,550 +1,254 @@
-//Reloj
-let mostrarFecha = document.getElementById('fecha');
-let mostrarReloj = document.getElementById('reloj');
+// document.getElementById('crear-pers-btn').onclick = function() {
+//     document.getElementById('login-section').style.display = 'none';
+//     document.getElementById('crear-pers-section').style.display = 'block';
+// };
 
-let fecha = new Date();
-
-let diaSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-let mesAnio = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-
-mostrarFecha.innerHTML = `${diaSemana[fecha.getDay()]}, ${fecha.getDate()} de ${mesAnio[fecha.getMonth()]} de ${fecha.getFullYear()}`;
-
-setInterval(() => {
-    let hora = new Date();
-    mostrarReloj.innerHTML = hora.toLocaleTimeString();
-}, 1000);
-
-// Función para capturar la fecha
-function capturarFecha(event) {
-    // Evitar que el formulario se envíe de inmediato
-    event.preventDefault();
-
-    // Obtener la fecha actual
-    let ahora = new Date();
-    
-    // Cambiar el formato de la fecha a YYYY-MM-DD
-    let anio = ahora.getFullYear();
-    let mes = String(ahora.getMonth() + 1).padStart(2, '0'); 
-    let dia = String(ahora.getDate()).padStart(2, '0'); 
-    // Formato correcto: YYYY-MM-DD
-    let fechaActual = `${dia}-${mes}-${anio}`;
-
-    // Obtener el input oculto
-    let fechaHoraInput = document.getElementById('fechaHora');
-
-    // Asegúrate de que el input oculto existe
-    if (fechaHoraInput) {
-        // Establecer el valor en el input oculto
-        fechaHoraInput.value = fechaActual;
-
-        // Ahora puedes enviar el formulario
-//         event.target.submit(); // Envía el formulario
+// document.getElementById('validar-pin-btn').onclick = function(event) {
+//     event.preventDefault();
+//     const pinInput = document.getElementById('pin').value;
+//     // Aquí iría la lógica para validar el PIN
+//     if (pinInput === '1234') {
+//         document.getElementById('nueva-pers-field').style.display = 'block';
 //     } else {
-//         console.error('El input oculto no se encontró');
+//         alert('PIN incorrecto');
 //     }
-// }
+// };
+
+// const backToLoginBtn = document.getElementById('volver-btn');
+// backToLoginBtn.onclick = function() {
+//     document.getElementById('crear-pers-section').style.display = 'none';
+//     document.getElementById('login-section').style.display = 'block';
+// };
 
 
-        // Ahora puedes enviar el formulario usando fetch
-//         const form = event.target; // Captura el formulario
 
-//         fetch('/validarDatos', {
+// //Metodo para registrar nuevos usuarios
+// document.getElementById('guardar-pers-btn').onclick = async function(event) {
+//     event.preventDefault(); 
+
+//     const nuevaPer = document.getElementById('nuevaPer').value;
+//     const nuevaContra = document.getElementById('nuevaContra').value;
+
+//     // Validar que los campos no estén vacíos
+//     if (!nuevaPer || !nuevaContra) {
+//         alert('Por favor, completa todos los campos.');
+//         return;
+//     }
+
+//     try {
+//         const response = await fetch('/crear-usuario', {
 //             method: 'POST',
 //             headers: {
-//                 'Content-Type': 'application/x-www-form-urlencoded' // Cambia el tipo de contenido
+//                 'Content-Type': 'application/json',
 //             },
-//             body: new URLSearchParams(new FormData(form)).toString() // Convierte los datos del formulario a URLSearchParams
-//         })
-//         .then(response => {
-//             if (!response.ok) {
-//                 throw new Error('Error en la respuesta del servidor');
-//             }
-//             return response.json(); // Leer la respuesta como JSON
-//         })
-//         .then(data => {
-//             // Mostrar el mensaje utilizando alert
-//             alert(data.mensajeForm); // Mensaje del servidor
-//             form.reset(); // Resetea el formulario
-//         })
-//         .catch(error => {
-//             console.error('Error:', error);
-//             alert('Error al enviar los datos. Inténtalo de nuevo.'); // Mensaje de error
+//             body: JSON.stringify({ nuevaPer, nuevaContra }),
 //         });
+
+//         const result = await response.json();
+
+//         if (result.success) {
+//             alert(result.message);
+//             clearFields();
+//             // Limpiar campos o redirigir al inicio de sesión
+//             // document.getElementById('nuevaPers').value = '';
+//             // document.getElementById('nuevaContra').value = '';
+//             document.getElementById('nueva-pers-field').style.display = 'none';
+//             document.getElementById('login-section').style.display = 'block';
 //         } else {
-//             console.error('El input oculto no se encontró');
+//             alert(result.message);
+//             clearFields();
 //         }
-// }
-            const form = event.target; // Captura el formulario
-
-            fetch('/validarDatos', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded' // Cambia el tipo de contenido
-                },
-                body: new URLSearchParams(new FormData(form)).toString() // Convierte los datos del formulario a URLSearchParams
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Error en la respuesta del servidor');
-                }
-                return response.json(); // Leer la respuesta como JSON
-            })
-            .then(data => {
-                // Mostrar el mensaje utilizando SweetAlert
-                Swal.fire({
-                    title: data.mensajeForm,
-                    html: `<p>${data.otroMensaje}</p>
-                            <p style="margin-bottom: 10px;"></p> <!-- Espacio adicional -->
-                            <p><b>${data.mensajeFinal}</b></p>`,
-                    // text: `${data.otroMensaje}\n\n${data.mensajeFinal}`,
-                    icon: 'success',
-                    confirmButtonText: 'Aceptar'
-                });
-                form.reset(); // Resetea el formulario
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                Swal.fire({
-                    title: 'Error',
-                    text: 'Error al enviar los datos. Inténtalo de nuevo.', // Mensaje de error
-                    icon: 'error',
-                    confirmButtonText: 'Aceptar'
-                });
-            });
-            } else {
-            console.error('El input oculto no se encontró');
-            }
-}
-
-//Modal para acceder a la pagina privada
-let modal = document.getElementById("modal");
-let btn = document.getElementById("privado");
-let span = document.getElementsByClassName("close")[0];
-
-btn.onclick = function() {
-    modal.style.display = "block";
-}
-
-// Cierra la modal al hacer clic en "X"
-span.onclick = function() {
-    modal.style.display = "none";
-}
-
-// Cierra la modal si el usuario hace clic fuera de ella
-// window.onclick = function(event) {
-//     if (event.target == modal) {
-//         modal.style.display = "none";
+//     } catch (error) {
+//         console.error('Error al guardar el nuevo usuario:', error);
+//         alert('Error al crear el usuario');
+//         clearFields();
 //     }
+// };
+
+// function clearFields() {
+//     document.getElementById('nuevaPer').value = '';
+//     document.getElementById('nuevaContra').value = '';
 // }
 
-//Acceso unico a la pagina
-// document.getElementById('loginForm').addEventListener('submit', function(event){
-//     event.preventDefault();
+// // Manejo del botón para volver al inicio de sesión
+// document.getElementById('volver-btn').onclick = function() {
+//     document.getElementById('crear-pers-section').style.display = 'none';
+//     document.getElementById('login-section').style.display = 'block';
+// };
 
-//     const login = document.getElementById('usuario').value;
-//     const correctLogin = 'Leo jefe'
+//Funcion para que el formulario login se oculte cuando queramos registrar nuevos usuarios
+document.getElementById('crear-pers-btn').onclick = function() {
+    document.getElementById('login-section').style.display = 'none';
+    document.getElementById('crear-pers-section').style.display = 'block';
+};
 
-//     const password = document.getElementById('contraseña').value;
-//     const correctPassword = '2024';
+document.getElementById('validar-pin-btn').onclick = function(event) {
+    event.preventDefault();
+    const pinInput = document.getElementById('pin').value;
 
-//     if (login==correctLogin && password ===correctPassword) {
-//         localStorage.setItem('authenticated', 'true');
-//         window.location.href = '/tabla';
-//     } else {
-//         document.getElementById('message').innerText = 'Contraseña incorrecta, intentalo de nuevo'
-//     }
-//     this.reset();
-//     return false;
-// });
-
-document.querySelector('.loginUser').addEventListener('click', function() {
-    const login = document.getElementById('usuario').value;
-    const correctLogin = 'Leo jefe';
-
-    const password = document.getElementById('contraseña').value;
-    const correctPassword = '2024';
-
-    if (login === correctLogin && password === correctPassword) {
-        localStorage.setItem('authenticated', 'true');
-        window.location.href = '/tabla';
+    // Validar el PIN
+    if (pinInput === '5710L30C4r0*') {
+        document.getElementById('nueva-pers-field').style.display = 'block';
     } else {
-        const messageElement = document.getElementById('message');
-        messageElement.innerText = 'Contraseña incorrecta, intentalo de nuevo';
-        
-        setTimeout(() => {
-            messageElement.innerText = ''; 
-        }, 3000);
+        alert('PIN incorrecto');
     }
-    document.getElementById('loginForm').reset();
+};
+
+//Funcion para mostrar el mensaje de error o dar acceso a las otras paginas
+document.getElementById('login-form').addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const username = document.getElementById('nombrePers').value;
+    const password = document.getElementById('contraPers').value;
+
+    // Llamar a tu API para iniciar sesión
+    const response = await fetch('login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombrePers: username, contraPers: password })
+    });
+
+    let result;
     
+    try {
+        // Intenta obtener la respuesta como JSON
+        result = await response.json();
+    } catch (e) {
+        // Si ocurre un error, muestra un mensaje
+        console.error('Error al obtener JSON:', e);
+        document.getElementById('errorMessage').textContent = 'Error en el servidor. Inténtalo de nuevo.';
+        return;
+    }
+
+    // Mostrar el mensaje de error si no fue exitoso
+    if (!result.success) {
+        document.getElementById('errorMessage').textContent = result.message;
+
+        setTimeout(() => {
+            document.getElementById('errorMessage').textContent = '';
+            document.getElementById('login-form').reset();
+        }, 3000);
+    } else {
+        // Manejar el inicio de sesión exitoso (redireccionar, etc.)
+        console.log('Redirigiendo a /formulario1');
+        window.location.href = '/formulario1';
+    }
 });
 
+//Funcion para crear nuevos usuarios
+document.getElementById('guardar-pers-btn').onclick = async function(event) {
+    event.preventDefault(); 
 
+    const nuevaPer = document.getElementById('nuevaPer').value;
+    const nuevaContra = document.getElementById('nuevaContra').value;
 
-//Funcion para escanear cedula :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-//Cedula se le mejoran los espacios en cada input
-// document.addEventListener('DOMContentLoaded', function() {
-//     const upCedula = document.getElementById('upCedula');
-//     const carMatricula = document.getElementById('carMatricula');
-
-//     // Inputs para datos del usuario
-//     const numeroCed = document.getElementById('numeroCed');
-//     const nombreInput = document.getElementById('nombreUsu');
-//     const generoInput = document.getElementById('generoUsu');
-//     const fechaNacimientoInput = document.getElementById('fechaUsu');
-//     const tipoSangreInput = document.getElementById('tipoUsu');
-
-//     // Inputs para datos del vehículo
-//     const propietarioInput = document.getElementById('nombrePro');
-//     const direccionInput = document.getElementById('direccionPro');
-//     const codigoDepartamentoInput = document.getElementById('codigoPro');
-
-//     let cedulaBuffer = '';
-//     let matriculaBuffer = '';
-//     let timeout;
-
-//     // Función para limpiar los datos del formulario
-//     function limpiarDatosUsuario() {
-//         numeroCed.value = '';
-//         nombreInput.value = '';
-//         generoInput.value = '';
-//         fechaNacimientoInput.value = '';
-//         tipoSangreInput.value = '';
-//     }
-
-//     function limpiarDatosVehiculo() {
-//         propietarioInput.value = '';
-//         direccionInput.value = '';
-//         codigoDepartamentoInput.value = '';
-//     }
-
-//     // Función para procesar datos de cédula
-//     function procesarCedula(datos) {
-//         const formattedData = datos.replace(/\s+/g, '').trim();
-        
-//         console.log('Datos escaneados:', formattedData);
-
-//         // Expresión regular para separar los números y las letras
-//         const regex = /(\d{10})([A-Z]+)([MFO])(\d{8})([A-Z])/;
-
-//         const match = formattedData.match(regex);
-
-//         if (match) {
-//             // Extraer datos
-//             const numero = match[1]; // Número de cédula
-//             const nombreCompleto = match[2]; // Nombre completo sin espacios
-//             const genero = match[3].toUpperCase(); // Género
-//             const fechaNacimiento = match[4]; // Fecha de nacimiento
-//             const tipoSangre = match[5].toUpperCase(); // Tipo de sangre
-
-//             // Formatear el nombre para agregar espacios entre los apellidos
-//             const nombreFormateado = nombreCompleto.replace(/([A-Z])/g, ' $1').trim(); // Agregar espacio antes de cada mayúscula
-
-//             // Asignar valores a los inputs
-//             numeroCed.value = numero;
-//             nombreInput.value = nombreFormateado.padEnd(30, ' '); // Rellenar el nombre con espacios
-//             generoInput.value = genero;
-//             fechaNacimientoInput.value = fechaNacimiento;
-//             tipoSangreInput.value = tipoSangre;
-
-//             console.log('Datos procesados correctamente:', {
-//                 numero,
-//                 nombreFormateado,
-//                 genero,
-//                 fechaNacimiento,
-//                 tipoSangre
-//             });
-//         } else {
-//             console.error('Formato de cédula no reconocido.');
-//         }
-//     }
-
-//     // Manejar el escaneo de cédula
-//     upCedula.addEventListener('input', function() {
-//         cedulaBuffer = upCedula.value;
-
-//         clearTimeout(timeout);
-//         timeout = setTimeout(() => {
-//             console.log('Datos escaneados (cedula buffer):', JSON.stringify(cedulaBuffer));
-
-//             // Limpiar datos anteriores
-//             limpiarDatosUsuario();
-
-//             // Procesar cédula
-//             procesarCedula(cedulaBuffer);
-//         }, 300);
-//     });
-
-//     // Manejar el escaneo de matrícula
-//     carMatricula.addEventListener('input', function() {
-//         matriculaBuffer = carMatricula.value;
-
-//         clearTimeout(timeout);
-//         timeout = setTimeout(() => {
-//             console.log('Datos escaneados (matricula buffer):', JSON.stringify(matriculaBuffer));
-
-//             limpiarDatosVehiculo();
-
-//             const datosVehiculo = matriculaBuffer.trim().split(/\s{2,}/);
-
-//             if (datosVehiculo.length >= 4) {
-//                 const nombrePropietario = datosVehiculo.slice(0, 3).join(' ').trim();
-//                 const direccion = datosVehiculo.slice(3, -1).join(' ').trim();
-//                 const codigoDepartamento = datosVehiculo[datosVehiculo.length - 1].trim();
-
-//                 propietarioInput.value = nombrePropietario;
-//                 direccionInput.value = direccion;
-//                 codigoDepartamentoInput.value = codigoDepartamento;
-//             } else {
-//                 console.error('Datos insuficientes para la matrícula.');
-//             }
-//         }, 300);
-//     });
-
-//     // Enviar el formulario
-//     document.getElementById('formRegistro').addEventListener('submit', function(event) {
-//         event.preventDefault();
-//         console.log('Formulario enviado con datos:');
-//         console.log('Cédula:', upCedula.value);
-//         console.log('Matrícula:', carMatricula.value);
-//     });
-
-//     // Evitar el llenado automático de otros campos
-//     upCedula.addEventListener('keydown', function(event) {
-//         if (event.key === 'Tab' || event.key === 'Enter') {
-//             event.preventDefault();
-//         }
-//     });
-
-//     carMatricula.addEventListener('keydown', function(event) {
-//         if (event.key === 'Tab' || event.key === 'Enter') {
-//             event.preventDefault();
-//         }
-//     });
-// });
-
-//Funcion para escanear documentos actualizada con los requerimientos que se pedian
-document.addEventListener('DOMContentLoaded', function() {
-    const upCedula = document.getElementById('upCedula');
-    const carMatricula = document.getElementById('carMatricula');
-
-    // Inputs para datos del usuario
-    const numeroCed = document.getElementById('numeroCed');
-    const nombreInput = document.getElementById('nombreUsu');
-    const generoInput = document.getElementById('generoUsu');
-    const fechaNacimientoInput = document.getElementById('fechaUsu');
-    const tipoSangreInput = document.getElementById('tipoUsu');
-
-    // Inputs para datos del vehículo
-    const propietarioInput = document.getElementById('nombrePro');
-    const direccionInput = document.getElementById('direccionPro');
-    const codigoDepartamentoInput = document.getElementById('codigoPro');
-
-    let cedulaBuffer = '';
-    let matriculaBuffer = '';
-    let timeout;
-
-    // Función para limpiar los datos del formulario
-    function limpiarDatosUsuario() {
-        numeroCed.value = '';
-        nombreInput.value = '';
-        generoInput.value = '';
-        fechaNacimientoInput.value = '';
-        tipoSangreInput.value = '';
+    // Validar que los campos no estén vacíos
+    if (!nuevaPer || !nuevaContra) {
+        alert('Por favor, completa todos los campos.');
+        return;
     }
 
-    function limpiarDatosVehiculo() {
-        propietarioInput.value = '';
-        direccionInput.value = '';
-        codigoDepartamentoInput.value = '';
-    }
+    try {
+        const response = await fetch('crear-usuario', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ nuevaPer, nuevaContra }),
+        });
 
-    // Función para bloquear inputs de usuario
-    function bloquearInputsUsuario() {
-        numeroCed.setAttribute('readonly', true);
-        nombreInput.setAttribute('readonly', true);
-        generoInput.setAttribute('readonly', true);
-        fechaNacimientoInput.setAttribute('readonly', true);
-        tipoSangreInput.setAttribute('readonly', true);
-    }
+        const result = await response.json();
 
-    // Función para desbloquear inputs de usuario
-    function desbloquearInputsUsuario() {
-        numeroCed.removeAttribute('readonly');
-        nombreInput.removeAttribute('readonly');
-        generoInput.removeAttribute('readonly');
-        fechaNacimientoInput.removeAttribute('readonly');
-        tipoSangreInput.removeAttribute('readonly');
-    }
-
-    // Función para bloquear inputs de vehículo
-    function bloquearInputsVehiculo() {
-        propietarioInput.setAttribute('readonly', true);
-        direccionInput.setAttribute('readonly', true);
-        codigoDepartamentoInput.setAttribute('readonly', true);
-    }
-
-    // Función para desbloquear inputs de vehículo
-    function desbloquearInputsVehiculo() {
-        propietarioInput.removeAttribute('readonly');
-        direccionInput.removeAttribute('readonly');
-        codigoDepartamentoInput.removeAttribute('readonly');
-    }
-
-    // Función para procesar datos de cédula
-    function procesarCedula(datos) {
-        const formattedData = datos.replace(/\s+/g, '').trim();
-        
-        console.log('Datos escaneados:', formattedData);
-
-        // Expresión regular para separar los números y las letras
-        const regex = /(\d{10})([A-Z]+)([MFO])(\d{8})([A-Z])/;
-
-        const match = formattedData.match(regex);
-
-        if (match) {
-            // Extraer datos
-            const numero = match[1]; // Número de cédula
-            const nombreCompleto = match[2]; // Nombre completo sin espacios
-            const genero = match[3].toUpperCase(); // Género
-            const fechaNacimiento = match[4]; // Fecha de nacimiento
-            const tipoSangre = match[5].toUpperCase(); // Tipo de sangre
-
-            // Formatear el nombre para agregar espacios entre los apellidos
-            const nombreFormateado = nombreCompleto.replace(/([A-Z])/g, ' $1').trim(); // Agregar espacio antes de cada mayúscula
-
-            // Asignar valores a los inputs
-            numeroCed.value = numero;
-            nombreInput.value = nombreFormateado.padEnd(30, ' '); // Rellenar el nombre con espacios
-            generoInput.value = genero;
-            fechaNacimientoInput.value = fechaNacimiento;
-            tipoSangreInput.value = tipoSangre;
-
-            // Desbloquear inputs una vez procesados los datos
-            desbloquearInputsUsuario();
-
-            console.log('Datos procesados correctamente:', {
-                numero,
-                nombreFormateado,
-                genero,
-                fechaNacimiento,
-                tipoSangre
-            });
+        if (result.success) {
+            alert(result.message);
+            clearFields(); // Limpiar campos
+            document.getElementById('nueva-pers-field').style.display = 'none'; // Ocultar nuevo usuario
+            document.getElementById('login-section').style.display = 'block'; // Mostrar inicio de sesión
+            document.getElementById('crear-pers-section').style.display = 'none'; // Mostrar inicio de sesión
+            // document.getElementById('pin').value = ''; // Limpiar el PIN
         } else {
-            console.error('Formato de cédula no reconocido.');
-            bloquearInputsUsuario(); // Bloquear si no se reconoce el formato
+            alert(result.message);
+            clearFields(); // Limpiar campos si ya existe
+            document.getElementById('nueva-pers-field').style.display = 'none';
         }
+    } catch (error) {
+        console.error('Error al guardar el nuevo usuario:', error);
+        alert('Error al crear el usuario');
+        clearFields(); // Limpiar campos en caso de error
+    }
+};
+
+// Función para eliminar usuario
+// Mostrar la modal
+document.getElementById('eliminar-pers-btn').onclick = function() {
+    document.getElementById('modalEliminar').style.display = 'block';
+};
+
+// Cerrar la modal
+document.querySelector('.close').onclick = function() {
+    document.getElementById('modalEliminar').style.display = 'none';
+};
+
+// Función para confirmar eliminación
+document.getElementById('confirmarEliminar-btn').onclick = async function() {
+    const nombreEliminar = document.getElementById('nombreEliminar').value;
+
+    if (!nombreEliminar) {
+        alert('Por favor, ingresa el nombre del usuario a eliminar.');
+        return;
     }
 
-    // Función para procesar datos de matrícula
-    function procesarMatricula(datos) {
-        const formattedData = datos.trim();
-        console.log('Datos escaneados:', formattedData);
+    try {
+        const response = await fetch('eliminar-usuario', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ nombreEliminar }),
+        });
 
-        // Simulación de extracción de datos (puedes modificar según tu lógica)
-        const datosVehiculo = formattedData.split(/\s{2,}/); // Asumiendo que los datos vienen separados por dos espacios
+        const result = await response.json();
 
-        if (datosVehiculo.length >= 4) {
-            const nombrePropietario = datosVehiculo.slice(0, 3).join(' ').trim();
-            const direccion = datosVehiculo.slice(3, -1).join(' ').trim();
-            const codigoDepartamento = datosVehiculo[datosVehiculo.length - 1].trim();
+        if (result.success) {
+            alert(result.message);
+            document.getElementById('modalEliminar').style.display = 'none'; // Cerrar modal
+            document.getElementById('nombreEliminar').value = ''; // Limpiar el campo
+            // Mostrar la sección de crear usuarios
+            document.getElementById('crear-pers-section').style.display = 'block';
+            document.getElementById('login-section').style.display = 'none';
 
-            propietarioInput.value = nombrePropietario;
-            direccionInput.value = direccion;
-            codigoDepartamentoInput.value = codigoDepartamento;
-
-            // Desbloquear inputs de vehículo
-            desbloquearInputsVehiculo();
+            // location.reload();
         } else {
-            console.error('Datos insuficientes para la matrícula.');
-            bloquearInputsVehiculo(); // Bloquear si no se procesan correctamente
+            document.getElementById('eliminarMessage').textContent = result.message;
+            document.getElementById('nombreEliminar').value = ''; 
+            // Ocultar el mensaje después de 3 segundos
+            setTimeout(() => {
+                document.getElementById('eliminarMessage').textContent = ''; // Limpiar el mensaje
+            }, 3000);
         }
+    } catch (error) {
+        console.error('Error al eliminar el usuario:', error);
+        alert('Error al eliminar el usuario');
     }
+};
 
-    // Manejar el escaneo de cédula
-    upCedula.addEventListener('input', function() {
-        cedulaBuffer = upCedula.value;
+// Manejo del botón para volver al inicio de sesión
+document.getElementById('volver-btn').onclick = function() {
+    document.getElementById('crear-pers-section').style.display = 'none';
+    document.getElementById('modalEliminar').style.display = 'none';
+    document.getElementById('login-section').style.display = 'block';
+    document.getElementById('nueva-pers-field').style.display = 'none';
 
-        clearTimeout(timeout);
-        timeout = setTimeout(() => {
-            console.log('Datos escaneados (cedula buffer):', JSON.stringify(cedulaBuffer));
+    clearFields();
+};
 
-            limpiarDatosUsuario();
-
-            bloquearInputsUsuario();
-
-            procesarCedula(cedulaBuffer);
-        }, 300);
-    });
-
-    // Manejar el escaneo de matrícula
-    carMatricula.addEventListener('input', function() {
-        matriculaBuffer = carMatricula.value;
-
-        clearTimeout(timeout);
-        timeout = setTimeout(() => {
-            console.log('Datos escaneados (matricula buffer):', JSON.stringify(matriculaBuffer));
-
-            limpiarDatosVehiculo();
-
-            // Bloquear inputs de vehículo al inicio
-            bloquearInputsVehiculo();
-
-            // Procesar matrícula
-            procesarMatricula(matriculaBuffer);
-        }, 300);
-    });
-
-    // Enviar el formulario
-    // document.getElementById('formRegistro').addEventListener('submit', function(event) {
-    //     event.preventDefault();
-
-    //     if (this.dataset.submitted) return;
-    //     this.dataset.submitted = true;
-
-    //     console.log('Formulario enviado con datos:');
-    //     console.log('Cédula:', upCedula.value);
-    //     console.log('Matrícula:', carMatricula.value);
-    // });
-
-    // Evitar el llenado automático de otros campos
-    upCedula.addEventListener('keydown', function(event) {
-        if (event.key === 'Tab' || event.key === 'Enter') {
-            event.preventDefault();
-        }
-    });
-
-    carMatricula.addEventListener('keydown', function(event) {
-        if (event.key === 'Tab' || event.key === 'Enter') {
-            event.preventDefault();
-        }
-    });
-
-    //Funcion para poner todos los input en mayuscula
-    // const inputs = document.querySelectorAll('form input');
-    // inputs.forEach(input => {
-    //     if (!input.closest('.modal')) {
-    //         input.addEventListener('input', function() {
-    //             this.value = this.value.toUpperCase();
-    //         });
-    //     }
-    // });
-    const inputs = document.querySelectorAll('form input');
-    inputs.forEach(input => {
-        if (!input.closest('.modal')) {
-            input.addEventListener('input', function() {
-                // Verifica si el input es uno de los que deben permanecer en minúsculas
-                const inputName = input.name; // Suponiendo que tienes un atributo 'name' en tus inputs
-
-                if (inputName !== 'correoUsr' && inputName !== 'color' && inputName !== 'ocupacion') {
-                    this.value = this.value.toUpperCase();
-                }
-            });
-        }
-    });
-
-});
+function clearFields() {
+    document.getElementById('nuevaPer').value = '';
+    document.getElementById('nuevaContra').value = '';
+    document.getElementById('nombreEliminar').value = '';
+    document.getElementById('eliminarMessage').textContent = '';
+    document.getElementById('pin').value = '';  
+}
 
 
 

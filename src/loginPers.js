@@ -41,9 +41,11 @@ router.post('/login', async (req, res) => {
     
     if (result.success) {
         // Si las credenciales son correctas, redirige al formulario
-        return res.redirect('/');
+        // return res.redirect('/formulario1');
+        return res.json({ success: true, message: 'Inicio de sesión correcto'});
     } else {
-        return res.status(401).json({ message: result.message });
+        // return res.status(401).json({ message: result.message });
+        return res.status(401).json({ success: false, message: result.message });
     }
 });
 
@@ -93,5 +95,77 @@ router.post('/crear-usuario', async (req, res) => {
         res.status(500).json({ success: false, message: 'Error en el servidor' });
     }
 });
+
+// Ruta para eliminar un usuario
+// router.post('/eliminar-usuario', async (req, res) => {
+//     const { nombreEliminar } = req.body;
+
+//     // Validar que el nombre no esté vacío
+//     if (!nombreEliminar) {
+//         return res.status(400).json({ success: false, message: 'El nombre del usuario es requerido' });
+//     }
+
+//     try {
+//         const query = 'DELETE FROM personasregistradas WHERE nombrePersRegis = ?';
+//         await new Promise((resolve, reject) => {
+//             db.query(query, [nombreEliminar], (error, results) => {
+//                 if (error) {
+//                     return reject(error);
+//                 }
+//                 resolve();
+//             });
+//         });
+
+//         res.json({ success: true, message: 'Usuario eliminado exitosamente' });
+//     } catch (error) {
+//         console.error('Error al eliminar el usuario:', error);
+//         res.status(500).json({ success: false, message: 'Error en el servidor' });
+//     }
+// });
+
+// Ruta para eliminar un usuario
+router.post('/eliminar-usuario', async (req, res) => {
+    const { nombreEliminar } = req.body;
+
+    // Validar que se haya proporcionado un nombre de usuario
+    if (!nombreEliminar) {
+        return res.status(400).json({ success: false, message: 'Se requiere un nombre de usuario.' });
+    }
+
+    try {
+        // Verificar si el usuario existe
+        const existingUserQuery = 'SELECT * FROM personasregistradas WHERE nombrePersRegis = ?';
+        const existingUsers = await new Promise((resolve, reject) => {
+            db.query(existingUserQuery, [nombreEliminar], (error, results) => {
+                if (error) {
+                    return reject(error);
+                }
+                resolve(results);
+            });
+        });
+
+        // Si el usuario no existe, retornar un mensaje de error
+        if (existingUsers.length === 0) {
+            return res.status(404).json({ success: false, message: 'El usuario no existe.' });
+        }
+
+        // Eliminar el usuario de la base de datos
+        const query = 'DELETE FROM personasregistradas WHERE nombrePersRegis = ?';
+        await new Promise((resolve, reject) => {
+            db.query(query, [nombreEliminar], (error) => {
+                if (error) {
+                    return reject(error);
+                }
+                resolve();
+            });
+        });
+
+        res.status(200).json({ success: true, message: 'Usuario eliminado exitosamente' });
+    } catch (error) {
+        console.error('Error al eliminar el usuario:', error);
+        res.status(500).json({ success: false, message: 'Error en el servidor' });
+    }
+});
+
 
 

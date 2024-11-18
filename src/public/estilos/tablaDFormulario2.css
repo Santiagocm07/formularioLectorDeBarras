@@ -174,6 +174,16 @@ button {
     color: #000000;
 }
 
+#abrirModalEmp {
+    background-color: #555;
+    color: #fff;
+    margin-left: 10px;
+}
+
+#abrirModalEmp:hover {
+    background-color: #888888;
+}
+
 .sectionTabla {
     height: 500px;
     overflow: auto;
@@ -225,4 +235,68 @@ tbody tr:nth-child(even) {
 
 tbody tr:nth-child(odd) {
     background-color: #ffffff;
+}
+
+/*Estilos modal reporte*/
+.modalInformeEmpresa {
+    display: none; 
+    position: fixed;
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+
+.modalContenido {
+    background-color: #fff;
+    margin: 15% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 4px;
+    width: 300px; 
+}
+
+.modalContenido h2 {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.modalContenido input {
+    width: 95%; 
+    padding: 8px; 
+    margin: 10px 0; 
+    box-sizing: border-box;
+}
+
+#guardarExcel {
+    /* background-color: #3ee059;
+    color: #ddd; */
+    background-color: #ffffff;
+    color: #3ee059;
+    padding: 10px;
+    margin-right: 5px;
+    border: 2px solid #3ee059;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#guardarExcel:hover {
+    background-color: #dbfde0;
+}
+
+.cerrar {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.cerrar:hover,
+.cerrar:focus {
+    color: #ff5e5e;
+    text-decoration: none;
+    cursor: pointer;
 }

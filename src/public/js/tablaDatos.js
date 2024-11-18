@@ -19,7 +19,7 @@
 
 //Función para cerrar sesión
 document.getElementById('singUp').addEventListener('click', () => {
-    window.location.href = '/';
+    window.location.href = '/formulario1';
 });
 
 //Traer datos de la DB para la tabla
@@ -272,3 +272,50 @@ function saveEdit(cell, newValue, originalValue) {
         cell.innerText = originalValue;
     }
 }
+
+//Funcion de la modal para descargar el reporte de la tabla
+const modal = document.getElementById('modalInforme');
+const btnAbrirModal = document.getElementById('abrirModal');
+const btnCerrarModal = document.querySelector('.cerrar');
+
+// Abrir la modal
+btnAbrirModal.onclick = function() {
+    modal.style.display = 'block';
+}
+
+// Cerrar la modal
+btnCerrarModal.onclick = function() {
+    modal.style.display = 'none';
+}
+
+// Cerrar la modal al hacer clic fuera de ella
+window.onclick = function(event) {
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+}
+
+  // Agregar evento al botón de descargar Excel
+  document.getElementById('guardar-excel').onclick = function() {
+    const tabla = document.getElementById('userTable');
+
+    // Hacer una copia de la tabla para modificarla sin afectar la original
+    const tablaCopia = tabla.cloneNode(true);
+
+     // Eliminar la última columna de la tabla antes de exportar
+     const filas = tablaCopia.rows;
+     for (let i = 0; i < filas.length; i++) {
+         filas[i].deleteCell(filas[i].cells.length - 1); // Elimina la última celda de cada fila
+     }
+
+    const nombreArchivo = document.getElementById('nombre-archivo').value || 'Reporte-usuarios';
+    
+    // Convertir la tabla en un archivo de Excel usando SheetJS
+    const wb = XLSX.utils.table_to_book(tablaCopia, { sheet: "Usuarios" });
+
+    // Crear el archivo Excel y descargarlo
+    XLSX.writeFile(wb, `${nombreArchivo}.xlsx`);
+
+    //Limpiar el input apenas se descargue el archivo
+    document.getElementById('nombre-archivo').value = '';
+};

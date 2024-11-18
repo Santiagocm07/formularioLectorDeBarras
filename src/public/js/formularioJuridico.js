@@ -1,10 +1,52 @@
+// document.getElementById('consultarButton').addEventListener('click', async () => {
+//     const nit = document.getElementById('numeroNit').value; // Obtén el NIT ingresado
+
+//     if (!nit) {
+//         alert('Por favor, ingrese un NIT válido.');
+//         return;
+//     }
+
+//     try {
+//         const response = await fetch('/consultar-rut', {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//             },
+//             body: JSON.stringify({ nit }), // Envía el NIT en el cuerpo de la solicitud
+//         });
+
+//         if (!response.ok) {
+//             throw new Error('Error al consultar el RUT');
+//         }
+
+//         const data = await response.json();
+
+//         // Asigna los datos recibidos a los inputs correspondientes
+//         document.getElementById('nombreEmpresa').value = data.razonSocial;
+//         // document.getElementById('fechaActual').value = data.fechaActual;
+//         document.getElementById('estadoEmpresa').value = data.estado;
+
+//     } catch (error) {
+//         console.error('Error:', error);
+//         alert('Hubo un problema al realizar la consulta.');
+//     }
+// });
+
 document.getElementById('consultarButton').addEventListener('click', async () => {
-    const nit = document.getElementById('numeroNit').value; // Obtén el NIT ingresado
+    const nit = document.getElementById('numeroNit').value;
 
     if (!nit) {
         alert('Por favor, ingrese un NIT válido.');
         return;
     }
+
+    // Mostrar el mensaje de carga
+    const loadingMessage = document.getElementById('loadingMessage');
+    loadingMessage.style.display = 'block';
+
+    // Deshabilitar el botón para evitar múltiples clics
+    const consultarButton = document.getElementById('consultarButton');
+    consultarButton.disabled = true;
 
     try {
         const response = await fetch('/consultar-rut', {
@@ -12,7 +54,7 @@ document.getElementById('consultarButton').addEventListener('click', async () =>
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ nit }), // Envía el NIT en el cuerpo de la solicitud
+            body: JSON.stringify({ nit }),
         });
 
         if (!response.ok) {
@@ -23,14 +65,18 @@ document.getElementById('consultarButton').addEventListener('click', async () =>
 
         // Asigna los datos recibidos a los inputs correspondientes
         document.getElementById('nombreEmpresa').value = data.razonSocial;
-        // document.getElementById('fechaActual').value = data.fechaActual;
         document.getElementById('estadoEmpresa').value = data.estado;
 
     } catch (error) {
         console.error('Error:', error);
         alert('Hubo un problema al realizar la consulta.');
+    } finally {
+        // Ocultar el mensaje de carga
+        loadingMessage.style.display = 'none';
+        consultarButton.disabled = false; // Habilitar el botón nuevamente
     }
 });
+
 
 //Función para poner la fecha 
 document.getElementById('consultarButton').addEventListener('click', function() {
@@ -81,16 +127,48 @@ document.getElementById('empresaVeh').addEventListener('input', function(event) 
     const datos = entradaBuffer.split(/\s+/); // Separar por espacios
 
     // Asignar valores a los campos correspondientes
-    if (datos.length >= 3) {
-        document.getElementById('nombreDue').value = `${datos[0]} ${datos[1]} ${datos[2]}`; // Nombre
-        document.getElementById('direccionDue').value = datos.slice(3, -1).join(' '); // Dirección
-        document.getElementById('codigoDepar').value = datos[datos.length - 1]; // Código (último dato)
+    // if (datos.length >= 3) {
+    //     document.getElementById('nombreDue').value = `${datos[0]} ${datos[1]} ${datos[2]}`; // Nombre
+    //     document.getElementById('direccionDue').value = datos.slice(3, -1).join(' '); // Dirección
+    //     document.getElementById('codigoDepar').value = datos[datos.length - 1]; // Código (último dato)
 
+    //     // Desbloquear los campos
+    //     document.getElementById('nombreDue').removeAttribute('readonly');
+    //     document.getElementById('direccionDue').removeAttribute('readonly');
+    //     document.getElementById('codigoDepar').removeAttribute('readonly');
+    // }
+
+    //Prueba 2
+    if (datos.length >= 3) {
+        const codigoDepar = datos.pop(); // Último elemento como código
+    
+        // Definir un conjunto de abreviaturas comunes para la dirección
+        const abreviaturas = ['CRA.', 'CAL.', 'CLL.', 'AV.', 'CR.', 'CL.', 'CALLE', 'VDA'];
+        let nombre = '';
+        let direccion = '';
+    
+        // Encontrar el índice de la primera abreviatura que aparece en los datos
+        const indiceDireccion = datos.findIndex(element => abreviaturas.includes(element));
+    
+        if (indiceDireccion !== -1) {
+            nombre = datos.slice(0, indiceDireccion).join(' '); // Todo antes de la dirección
+            direccion = datos.slice(indiceDireccion).join(' '); // Todo desde la dirección en adelante
+        } else {
+            // Si no se encuentra ninguna abreviatura, manejar la separación normalmente
+            nombre = datos.slice(0, -2).join(' '); // Todos menos los dos últimos
+            direccion = datos.slice(-2).join(' '); // Los últimos dos elementos como dirección
+        }
+    
+        document.getElementById('nombreDue').value = nombre;
+        document.getElementById('direccionDue').value = direccion;
+        document.getElementById('codigoDepar').value = codigoDepar;
+    
         // Desbloquear los campos
         document.getElementById('nombreDue').removeAttribute('readonly');
         document.getElementById('direccionDue').removeAttribute('readonly');
         document.getElementById('codigoDepar').removeAttribute('readonly');
     }
+    
 });
 
  // Función para convertir a mayúsculas
@@ -101,7 +179,7 @@ document.getElementById('empresaVeh').addEventListener('input', function(event) 
 }
 
 // Aplicar la función a los campos deseados
-const camposParaMayusculas = ['nombreDue', 'direccionDue', 'codigoDepar','placaVehi', 'marcaVehi'];
+const camposParaMayusculas = ['repreLegalEmp','nombreDue', 'direccionDue', 'codigoDepar','placaVehi', 'marcaVehi'];
 camposParaMayusculas.forEach(convertirAMayusculas);
 
 

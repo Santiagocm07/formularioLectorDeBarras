@@ -36,16 +36,15 @@ app.use(bodyParser.urlencoded({ extended: true })); // Para parsear datos de for
 // app.use('/consultar-rut', formulario2Routes);
 app.use(formulario2Routes);
 
-
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname,'public')));
 
 // Rutas para las paginas
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'paginas', 'index.html'));
 });
 
-app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'paginas', 'login.html'));
+app.get('/formulario1', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'paginas', 'formularioUsuario.html'));
 });
 
 app.get('/formulario', (req, res) => {
@@ -205,6 +204,7 @@ app.post('/consultaFormularioDos', function(req, res) {
     let correoComp = datosEmp.correoEmpresa;
     let ivaComp = datosEmp.ivaEmpresa;
     let personaComp = datosEmp.tipoPersonaEmp;
+    let repreLegalComp = datosEmp.repreLegalEmp;
 
     let nombrePose = datosEmp.nombreDue;
     let direccionPose = datosEmp.direccionDue;
@@ -217,8 +217,8 @@ app.post('/consultaFormularioDos', function(req, res) {
     let tipoAtm = datosEmp.tipoVehi;
     let ocupacionPose = datosEmp.ocupacionDue;
 
-    let registroEmpresa = "INSERT INTO `datosempresa` (numeroEmp, nombreEmp, fechaActual, estadoEmp, celularEmp, correoEmp, ivaEmpresa, tipoPersonaEmp, nombreTit, direccionTit, codDepartamento, placaAuto, modeloAuto, cilindrajeAuto, marcaAuto, colorAuto, tipoVehiculoEmp, ocupacionTit) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
-    let valoresEmpresa = [numeroComp, nombreComp, fechaIngreso, estadoComp, celularComp, correoComp, ivaComp, personaComp, nombrePose, direccionPose, numeroCodDepart, placaAtm, modeloAtm, cilindrajeAtm, marcaAtm, colorAtm, tipoAtm, ocupacionPose];
+    let registroEmpresa = "INSERT INTO `datosempresa` (numeroEmp, nombreEmp, fechaActual, estadoEmp, celularEmp, correoEmp, ivaEmpresa, tipoPersonaEmp, repreLegal, nombreTit, direccionTit, codDepartamento, placaAuto, modeloAuto, cilindrajeAuto, marcaAuto, colorAuto, tipoVehiculoEmp, ocupacionTit) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+    let valoresEmpresa = [numeroComp, nombreComp, fechaIngreso, estadoComp, celularComp, correoComp, ivaComp, personaComp, repreLegalComp, nombrePose, direccionPose, numeroCodDepart, placaAtm, modeloAtm, cilindrajeAtm, marcaAtm, colorAtm, tipoAtm, ocupacionPose];
 
     conexion.query(registroEmpresa, valoresEmpresa, function(error) {
         if (error) {

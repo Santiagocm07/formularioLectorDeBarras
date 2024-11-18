@@ -16,7 +16,7 @@ router.post('/consultar-rut', async (req, res) => {
 
 // Función para consultar el RUT usando Puppeteer
 async function obtenerDatosNIT(nit) {
-    const browser = await puppeteer.launch({ headless: false }); // Muestra el navegador
+    const browser = await puppeteer.launch({ headless: true }); // No mostrar el navegador
     const page = await browser.newPage();
 
     try {

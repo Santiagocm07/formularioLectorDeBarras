@@ -47,6 +47,7 @@
         <div class="table_header">
             <p><b>Usuarios registrados</b></p>
             <div>
+                <button id="abrirModal" class="abrirModal"><i class="fa-solid fa-file-excel"></i></button>
                 <input type="text" id="filterInput" placeholder="Buscar...">
                 <button class="add_new">Buscar usuario</button>
             </div>
@@ -78,10 +79,23 @@
         </div>
     </div>
 
+     <!-- Modal -->
+     <div id="modalInforme" class="modalInforme">
+        <div class="modal-contenido">
+            <span class="cerrar">&times;</span>
+            <h2>Guardar informe</h2>
+            <label for="nombre-archivo">Nombre del archivo:</label>
+            <input type="text" id="nombre-archivo" placeholder="Ingresa el nombre" />
+            <button id="guardar-excel"><i class="fa-solid fa-file-excel"></i></button>
+        </div>
+    </div>
+
     <script src="../js/tablaDatos.js"></script>
     <!--SweeatAlert-->
     <!-- <script src="sweetalert2.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!--incluir la biblioteca SheetJS para convertir la tabla a excel-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     
 </body>
 </html>
